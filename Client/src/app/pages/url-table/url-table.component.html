@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <form [formGroup]="urlForm" class="form" (ngSubmit)="onSubmit()">
+    <div class="url-input">
+      <label for="url">Url:</label>
+      <input type="text" id="url" formControlName="inputUrl" required>
+    </div>
+    <div *ngIf="urlForm.get('inputUrl')?.invalid && (urlForm.get('inputUrl')?.dirty || urlForm.get('inputUrl')?.touched)" class="error-message">
+      <div *ngIf="urlForm.get('inputUrl')?.hasError('required')">URL is required.</div>
+      <div *ngIf="urlForm.get('inputUrl')?.hasError('pattern')">URL is invalid.</div>
+    </div>
+    <button class="add-student-btn" type="submit" [disabled]="!urlForm.valid">Add</button>
+  </form>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Original URL</th>
+      <th>Shortened URL</th>
+      <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let url of dataSource">
+      <td>{{ url.fullUrl }}</td>
+      <td><a href="{{ url.shorten }}" target="_blank">{{ url.shorten }}</a></td>
+      <td>
+        <button class="edit-btn" (click)="onInfo(url)">Info</button>
+        <button class="delete-btn" (click)="onDelete(url)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

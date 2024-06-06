@@ -1,0 +1,20 @@
+﻿@using URLShortener.Domain.Models
+@model URLShortener.Domain.Models.ShortenUrl
+
+@{
+    ViewBag.Title = "Info";
+}
+
+<table class="table">
+
+    <tbody>
+    @foreach(var item in typeof(ShortenUrl).GetProperties())
+    {
+        <tr>
+            <td>
+                @item.Name : @item.GetValue(Model);
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
